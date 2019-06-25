@@ -70,7 +70,7 @@ if __name__ == '__main__':
     #列表推导法 list[item | for item in iterable]
     urls = ["http://www.cbooo.cn/year?year={}".format(year) for year in range(2008, 2020)]
     for url in urls:
-        print("正在操作{}年".format(url[-4:]))
+        print("正在操作{}年.".format(url[-4:]))
         text=get_Html(url)
         info = getInfo(text)
         write2csv(info, url[-4:])
