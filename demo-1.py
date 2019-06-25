@@ -10,7 +10,7 @@ import re
 class spiderstory(object):
     def __init__(self):
         #self.url='https://book.qidian.com/info/1015323848#Catalog'
-        self.names=[]#存放章节
+        self.names=[]#存放章节名称
         self.hrefs=[]#存放链接
 
     #获取章节和URL
@@ -33,7 +33,7 @@ class spiderstory(object):
         respons2 = requests.get(url=url)
         c = BeautifulSoup(str(respons2.text), 'html.parser')
         b = c.find_all('div', class_='read-content j_readContent')
-        text = []
+        text = []#存放章节内容
         for temp in b:
             text.append(temp.p.get_text())
         return text
@@ -44,7 +44,7 @@ class spiderstory(object):
         with open(path,'a',encoding='utf-8') as f:
             f.write(name+'\n')#方法用于向文件中写入指定字符串。
             f.writelines(text1)#方法用于向文件中写入一序列的字符串。
-            f.write('\n')
+            f.write('\n\n')
 
 
 if __name__ == "__main__": # 运行入口

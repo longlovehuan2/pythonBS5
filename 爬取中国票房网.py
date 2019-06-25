@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
-from lxml import etree
+from lxml import etree  # lxml是python的一个解析库，支持HTML和XML的解析，支持XPath解析方式
+#pandas是一种Python数据分析的利器，是一个开源的数据分析包，
+#最初是应用于金融数据分析工具而开发出来的，因此pandas为时间序列分析提供了很好的支持
 import pandas as pd
 
 import requests
 
+#DataFrame：一个表格型的数据结构，包含有一组有序的列，每列可以是不同的值类型(数值、字符串、布尔型等)，
+#DataFrame即有行索引也有列索引，可以被看做是由Series组成的字典
+
+#请求的头信息
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
@@ -13,7 +19,7 @@ def get_Html(url):
     r=requests.get(url,headers=headers)
     r.encoding=r.apparent_encoding
     return r.text
-
+#定义获取电影名称、类型、价格等信息
 def getInfo(text):
     #定义集合
     info = {}
@@ -61,6 +67,7 @@ def write2csv(dict,year):
 
 if __name__ == '__main__':
     #url构造
+    #列表推导法 list[item | for item in iterable]
     urls = ["http://www.cbooo.cn/year?year={}".format(year) for year in range(2008, 2020)]
     for url in urls:
         print("正在操作{}年".format(url[-4:]))
